@@ -1,23 +1,45 @@
- 
- let root = document.getElementById('root');
-
- let form = document.createElement("form");
+ import("./index.css")
   
- let input = document.createElement("input");
+ import logo from "./logo.png";
 
- let submit = document.createElement("button");
-     submit.innerHTML = "SUBMIT"
+ let img = document.createElement("img");
+ img.src = logo;
+ img.className = "logo";
 
- form.append(input,submit)
+
  
- let list = document.createElement("div")
- submit.addEventListener("click", () => {
-     let points = document.createElement("h2")
-     points.innerHTML = input.value;
-     list.append(points)
-    });
-    
+
+let root = document.getElementById("root");
+
+let form = document.createElement("div");
+form.className = "maindiv"
+
+let input = document.createElement("input");
+input.setAttribute("class", "input");
+input.placeholder = "Add task";
+
+let submit = document.createElement("button");
+submit.innerHTML = "ADD";
+submit.className = "btn";
+
+let reset = document.createElement("button");
+reset.innerHTML = "Remove";
+reset.className = "reset";
 
 
+ form.append( input, submit, reset)
 
-root.append(form,list)
+let list = document.createElement("div");
+list.className = "lists";
+submit.addEventListener("click", () => {
+  let points = document.createElement("h2");
+  points.innerHTML = input.value;
+  list.append(points);
+  input.value = null;
+});
+
+reset.addEventListener("click", () => {
+  list.innerHTML = null;
+});
+
+root.append(img,form, list);
