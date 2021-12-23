@@ -15,26 +15,27 @@ function App() {
           ))} */}
           <h1>Mobile Operating System</h1>
           <ul>
+           <List></List>
            
-           {mobile.map((e) =>(
+           {/* {mobile.map((e) =>(
             <List num = {e} /> 
-           ))}
+           ))} */}
           </ul>
           <h1>Mobile Manufacturing</h1>
           <ul>
-          {brands.map((e) =>(
-            <Manu num = {e} /> 
-           ))}
+          <Menu />
           </ul>
-
     </div>
   );
 }
-function List({num}){
-  return <li>{num}</li>
+function List(){
+  const mobile = ["Android","blackberry","Iphone","Windows Phone"];
+  return( mobile.map((e)=> <li>{e}</li>) )
 }
-function Manu({num}){
-  return <li>{num}</li>
+function Menu(){
+  const brands = ["Samsung","BlackBerry","MI","Micromax"];
+  return ( brands.map((e)=> <li>{e}</li>) )
 }
+
 
 export default App;
