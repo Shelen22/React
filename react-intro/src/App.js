@@ -15,21 +15,26 @@ function App() {
           ))} */}
           <h1>Mobile Operating System</h1>
           <ul>
-             <li>Android</li>
-             <li>blackberry</li>
-             <li>Iphone</li>
-             <li>Windows Phone</li>
+           
+           {mobile.map((e) =>(
+            <List num = {e} /> 
+           ))}
           </ul>
           <h1>Mobile Manufacturing</h1>
           <ul>
-            <li className="square">Samsung</li>
-            <li className="square">HTC</li>
-            <li>Micromax</li>
-            <li className = "circle">Apple</li>
+          {brands.map((e) =>(
+            <Manu num = {e} /> 
+           ))}
           </ul>
 
     </div>
   );
+}
+function List({num}){
+  return <li>{num}</li>
+}
+function Manu({num}){
+  return <li>{num}</li>
 }
 
 export default App;
