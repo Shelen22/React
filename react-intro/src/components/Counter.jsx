@@ -16,7 +16,7 @@ function Counter(props){
             <div>
             <button onClick={()=> changeCount(1)}>ADD_1</button>
             <button onClick={()=> changeCount(-1)}>Sub_1</button>
-            <button onDoubleClick={()=> Multiplication(2)}>Double Click here</button>
+            <button onClick={()=> Multiplication(2)}>Click here</button>
             </div>
         </div>
     )
