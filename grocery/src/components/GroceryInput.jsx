@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 
-function GroceryInput() {
+function GroceryInput({getData}) {
     const [text, setText] = useState("");
     const handleChange = (e) =>{
         setText(e.target.value);

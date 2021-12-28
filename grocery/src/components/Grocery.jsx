@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState} from "react-redux";
+import {useState} from "react";
 import {nanoid} from "nanoid";
 import GroceryInput from './GroceryInput';
 import GroceryList from './GroceryList';
@@ -15,11 +15,18 @@ function Grocery() {
           };
           setList([...list, payload])
       }
+      const handledelete = (id) => {
+        const updatedList = list.filter((curElem) => {
+            return (curElem.id !== id)
+        });
+
+        setList(updatedList)
+      }
     return (
         <div>
             <>
            <GroceryInput getData = {handleclick} />
-           {list.map((e) => <GroceryList key = {e.id} {...e} />)}
+           {list.map((e) => <GroceryList key = {e.id} {...e} deleteItem = {handledelete} />)}
           </>
         </div>
     )
