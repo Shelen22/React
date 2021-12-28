@@ -4,8 +4,8 @@ function GroceryList({title,status, id, deleteItem}) {
     return (
         <div>
             <h2>
-            {title} - {status? "Done" : "Not-done"}
-            <button onClick={deleteItem} />
+            {title}
+            <button onClick={ () => deleteItem(id)} >Delete</button>
         </h2>   
         </div>
     )
