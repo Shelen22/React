@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import { Todos } from "./components/Todo"
 
 function App() {
-  const  tot
+  
   return (
     <div className="App">
-      
+      <Todos />
     </div>
   );
 }
