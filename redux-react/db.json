@@ -1,9 +1,3 @@
 {
-  "todos": [
-    {
-      "status": false,
-      "title": "redux",
-      "id": 1
-    }
-  ]
+  "todos": []
 }
