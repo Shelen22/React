@@ -1,15 +1,18 @@
 
 import { useSelector, useDispatch  } from "react-redux";
-import { useState } from "react";
-import { addTodoLoading, addTodoSuccess, addTodoError } from "../store/action";
+import { useState,useEffect } from "react";
+import { addTodoLoading, addTodoSuccess, addTodoError,removeTodo, getTodoSuccess, getTodoLoading, getTodoError } from "../store/action";
  
 export const Todos = () => {
   const [text, setText] = useState("");
-  const todos = useSelector(state => state.todos);
+  const { loading, todos, error } = useSelector((state) =>({
+      loading: state.loading,
+      todos: state.todos,
+      error: state.error
+  }));
   const dispatch = useDispatch()
   const handleinput = (e) => {
-    setText(e.target.value);
-    
+    setText(e.target.value); 
   };
   const handleTodo = () =>{
       dispatch(addTodoLoading())
@@ -20,7 +23,8 @@ export const Todos = () => {
      })
      .then((d) => d.json())
      .then((res) =>{
-         dispatch(addTodoSuccess(res))
+         dispatch(addTodoSuccess(res));
+         getTodo()
          setText("")
      })
      .catch((err) =>{
@@ -28,31 +32,47 @@ export const Todos = () => {
      })
     
   }
-  const handleDelete = () =>{
+  const handleDelete = (id) =>{
     // dispatch(addTodoLoading())
-   fetch("http://localhost:3006/todos/id", {
+   fetch(`http://localhost:3006/todos/${id}`, {
        method: "DELETE",
-       body: JSON.stringify({status:false, title:text}),
-       headers: {'Content-Type': 'application/json'}
    })
-   .then((d) => d.json())
    .then((res) =>{
-       dispatch(addTodoSuccess(res))
-       setText("")
+       dispatch(removeTodo(res))
+       getTodo();
    })
    .catch((err) =>{
        dispatch(addTodoError(err))
    })
   
 }
+
+useEffect(() =>{
+    getTodo();
+},[]) 
+async function getTodo(){
+    try{
+        dispatch(getTodoLoading())
+await fetch("http://localhost:3006/todos")
+.then((d) => d.json())
+.then((res) =>{
+    dispatch(getTodoSuccess(res))
+})
+    }catch (err){
+        dispatch(getTodoError(err))
+    }
+}
   return (
+      loading ? (
+          <div>Loading.....</div>
+      ):error ?(<div>Something went wrong</div>):
     <div>
       <input value ={text} type="text" placeholder="Enter Todo" onChange={handleinput} />
       <button onClick={handleTodo}>Add Todo</button>
       {todos.map((e)=>(
-          <div>{e.title}{e.status} </div>    
+          <div>{e.title}-{e.status ? "Done" : "Not Done"}<button onClick={() =>{handleDelete(e.id)}}>Delete</button></div>    
       ))}
-      <span onClick={handleDelete} >Delete</span>
+      
     </div>
   );
 };
