@@ -62,6 +62,25 @@ await fetch("http://localhost:3006/todos")
         dispatch(getTodoError(err))
     }
 }
+
+// const handleEdit = (id) =>{
+//     dispatch(addTodoLoading())
+//    fetch(`http://localhost:3006/todos/${id}`, {
+//        method: "PATCH",
+//        body: JSON.stringify({status:false, title:text}),
+//        headers: {'Content-Type': 'application/json'}
+//    })
+//    .then((d) => d.json())
+//    .then((res) =>{
+//        dispatch(addTodoSuccess(res));
+//        getTodo()
+//        setText("")
+//    })
+//    .catch((err) =>{
+//        dispatch(addTodoError(err))
+//    })
+  
+// }
   return (
       loading ? (
           <div>Loading.....</div>
@@ -70,7 +89,10 @@ await fetch("http://localhost:3006/todos")
       <input value ={text} type="text" placeholder="Enter Todo" onChange={handleinput} />
       <button onClick={handleTodo}>Add Todo</button>
       {todos.map((e)=>(
-          <div>{e.title}-{e.status ? "Done" : "Not Done"}<button onClick={() =>{handleDelete(e.id)}}>Delete</button></div>    
+          <div>{e.title}-{e.status ? "Done" : "Not Done"}
+          {/* <button onClick ={() =>{handleEdit(e.id)}}>Edit</button> */}
+          <button onClick={() =>{handleDelete(e.id)}}>Delete</button>
+          </div>    
       ))}
       
     </div>
