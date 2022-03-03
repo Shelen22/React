@@ -8,8 +8,7 @@ const Products = () => {
     const [product , setProduct] = useState([]);
     
     useEffect(() =>{
-        getprod()
-        
+        getprod()      
     },[])
     
     const getprod = () =>{
